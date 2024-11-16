@@ -11,6 +11,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('home');
+    });
     Route::get('/home', [HomeController::class, 'home'])->name('home');
     Route::get('/about', [HomeController::class, 'about'])->name('about');
     Route::get('/ourDoctors', [HomeController::class, 'ourDoctors'])->name('ourDoctors');
