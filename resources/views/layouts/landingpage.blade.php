@@ -470,14 +470,6 @@
                                                     <li><a href="{{route('careers')}}">Join Our Talent Pool</a></li>
                                                 </ul>
                                             </li>
-                                            <li>
-                                                <form action="{{ route('logout') }}" method="post"
-                                                    style="display: inline;">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-danger">Logout</button>
-                                                </form>
-                                            </li>
-
                                         </ul>
                                     </nav>
                                 </div>

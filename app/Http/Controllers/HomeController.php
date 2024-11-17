@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
@@ -11,10 +12,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     /**
      * Show the application dashboard.
@@ -23,7 +24,11 @@ class HomeController extends Controller
      */
     public function home()
     {
-        return view('pages.home');
+        $response = Http::withOptions(['verify' => false])->get('https://edos.mytrustlab.com/api/tests/');
+            $items = $response->json();
+            // dd($items);
+            
+        return view('pages.home' ,compact('items'));
     }
 
     public function about()

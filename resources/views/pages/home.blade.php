@@ -162,171 +162,27 @@
                         </div>
 
                         <div class="main-container milestone">
-
-                            <div class="box">
+                            
+                            @foreach ($items as $item)
                                 <div class="card">
                                     <div class="badge">50% Off</div>
-                                    <h3>Lifestyle Health Checkup</h3>
+                                    <h3>{{ $item['test_name'] }}</h3>
                                     <p>Includes <span
-                                            style="color: orangered; font-size: 1.15em; background-color: white; padding: 2%; border-radius: 100%; border: 0.5px solid #1F2B7B;">52</span>
-                                        Parameters</p>
+                                            style="color: orangered; font-size: 1.15em; background-color: white; padding: 2%; border-radius: 100%; border: 0.5px solid #1F2B7B;">
+                                            {{ count($item['parameters']) }} Parameters</span>
+                                    </p>
                                     <div class="price-container">
                                         <div class="price">
-                                            <del>₹4010</del>
-                                            <span class="offer-price">₹1599</span>
-
+                                            <del>₹{{ number_format($item['test_actual_price'], 0) }}</del>
+                                            <span class="offer-price">₹{{ number_format($item['test_actual_price'] * 0.5, 0) }}</span>
                                         </div>
                                     </div>
                                     <div class="buttons">
-                                        <a onclick="openModal()" class="more-details" style="color: white;">More
-                                            Details</a>
-                                        <!-- <a href="#" class="add-to-cart"><i class="icofont-cart"></i> Add to Cart</a> -->
+                                        <a onclick="openModal()" class="more-details" style="color: white;">More Details</a>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="box">
-                                <div class="card">
-                                    <div class="badge">50% Off</div>
-                                    <h3>Nutients Deficiency Package</h3>
-                                    <p>Includes <span
-                                            style="color: orangered; font-size: 1.15em; background-color: white; padding: 2%; border-radius: 100%; border: 0.5px solid #1F2B7B;">08</span>
-                                        Parameters</p>
-                                    <div class="price-container">
-                                        <div class="price">
-                                            <del>₹4130</del>
-                                            <span class="offer-price">₹2099</span>
-
-                                        </div>
-                                    </div>
-                                    <div class="buttons">
-                                        <a href="#" class="more-details">More Details</a>
-                                        <!-- <a href="#" class="add-to-cart"><i class="icofont-cart"></i> Add to Cart</a> -->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box">
-                                <div class="card">
-                                    <div class="badge">50% Off</div>
-                                    <h3>Complete Blood Profile 🩸</h3>
-                                    <p>Includes <span
-                                            style="color: orangered; font-size: 1.15em; background-color: white; padding: 2%; border-radius: 100%; border: 0.5px solid #1F2B7B;">21</span>
-                                        Parameters</p>
-                                    <div class="price-container">
-                                        <div class="price">
-                                            <del>₹1260</del>
-                                            <span class="offer-price">₹600</span>
-
-                                        </div>
-                                    </div>
-                                    <div class="buttons">
-                                        <a href="#" class="more-details">More Details</a>
-                                        <!-- <a href="#" class="add-to-cart"><i class="icofont-cart"></i> Add to Cart</a> -->
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="box">
-                                <div class="card">
-                                    <div class="badge">50% Off</div>
-                                    <h3>Obesity Health Checkup</h3>
-                                    <p>Includes <span
-                                            style="color: orangered; font-size: 1.15em; background-color: white; padding: 2%; border-radius: 100%; border: 0.5px solid #1F2B7B;">53</span>
-                                        Parameters</p>
-                                    <div class="price-container">
-                                        <div class="price">
-                                            <del>₹3480</del>
-                                            <span class="offer-price">₹1599</span>
-
-                                        </div>
-                                    </div>
-                                    <div class="buttons">
-                                        <a href="#" class="more-details">More Details</a>
-                                        <!-- <a href="#" class="add-to-cart"><i class="icofont-cart"></i> Add to Cart</a> -->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box">
-                                <div class="card">
-                                    <div class="badge">50% Off</div>
-                                    <h3>Electrolyte Profile - Serum</h3>
-                                    <p>Includes <span
-                                            style="color: orangered; font-size: 1.15em; background-color: white; padding: 2%; border-radius: 100%; border: 0.5px solid #1F2B7B;">03</span>
-                                        Parameters</p>
-                                    <div class="price-container">
-                                        <div class="price">
-                                            <del>₹899</del>
-                                            <span class="offer-price">₹360</span>
-
-                                        </div>
-                                    </div>
-                                    <div class="buttons">
-                                        <a href="#" class="more-details">More Details</a>
-                                        <!-- <a href="#" class="add-to-cart"><i class="icofont-cart"></i> Add to Cart</a> -->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box">
-                                <div class="card">
-                                    <div class="badge">50% Off</div>
-                                    <h3>Alcohol Health Checkup 🍺</h3>
-                                    <!-- 	<p>Includes <b>70</b> Parameters</p> -->
-                                    <p>Includes <span
-                                            style="color: orangered; font-size: 1.15em; background-color: white; padding: 2%; border-radius: 100%; border: 0.5px solid #1F2B7B;">70</span>
-                                        Parameters</p>
-                                    <div class="price-container">
-                                        <div class="price">
-                                            <del>₹5800</del>
-                                            <span class="offer-price">₹1499</span>
-
-                                        </div>
-                                    </div>
-                                    <div class="buttons">
-                                        <a href="#" class="more-details">More Details</a>
-                                        <!-- <a href="#" class="add-to-cart"><i class="icofont-cart"></i> Add to Cart</a> -->
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="box">
-                                <div class="card">
-                                    <div class="badge">50% Off</div>
-                                    <h3>Health Checkup Smoking 🚬</h3>
-                                    <p>Includes <span
-                                            style="color: orangered; font-size: 1.15em; background-color: white; padding: 2%; border-radius: 100%; border: 0.5px solid #1F2B7B;">70</span>
-                                        Parameters</p>
-                                    <div class="price-container">
-                                        <div class="price">
-                                            <del>₹5800</del>
-                                            <span class="offer-price">₹1599</span>
-
-                                        </div>
-                                    </div>
-                                    <div class="buttons">
-                                        <a href="#" class="more-details">More Details</a>
-                                        <!-- <a href="#" class="add-to-cart"><i class="icofont-cart"></i> Add to Cart</a> -->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box">
-                                <div class="card">
-                                    <div class="badge">50% Off</div>
-                                    <h3>Health Checkup Fitness 💪</h3>
-                                    <p>Includes <span
-                                            style="color: orangered; font-size: 1.15em; background-color: white; padding: 2%; border-radius: 100%; border: 0.5px solid #1F2B7B;">69</span>
-                                        Parameters</p>
-                                    <div class="price-container">
-                                        <div class="price">
-                                            <del>₹5340</del>
-                                            <span class="offer-price">₹1799</span>
-
-                                        </div>
-                                    </div>
-                                    <div class="buttons">
-                                        <a href="#" class="more-details">More Details</a>
-                                        <!-- <a href="#" class="add-to-cart"><i class="icofont-cart"></i> Add to Cart</a> -->
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
+                            
 
 
 
