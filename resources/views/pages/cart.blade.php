@@ -478,48 +478,111 @@
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 <script>
-// Track the total amount dynamically
-let totalAmount = 0;
+    // Track the total amount dynamically
+    let totalAmount = 0;
 
-// Function to update total amount based on selected value
-function updateTotalFromSelect(selectElement) {
-    const selectedAmount = parseInt(selectElement.value);
-    
-    // Add the selected amount to the total
-    if (selectedAmount > 0) {
-        totalAmount += selectedAmount;
+    // Function to update total amount based on selected value
+    function updateTotalFromSelect(selectElement) {
+        const selectedAmount = parseInt(selectElement.value);
+
+        // Add the selected amount to the total
+        if (selectedAmount > 0) {
+            totalAmount += selectedAmount;
+        }
+
+        // Update the displayed total amount
+        document.getElementById('subtotal').innerText = `Rs. ${totalAmount}`;
+        document.getElementById('total').innerText = `Rs. ${totalAmount}`;
     }
 
-    // Update the displayed total amount
-    document.getElementById('subtotal').innerText = `Rs. ${totalAmount}`;
-    document.getElementById('total').innerText = `Rs. ${totalAmount}`;
-}
 
-// Razorpay payment function
-function payWithRazorpay() {
-    const options = {
-        "key": "rzp_test_N8DlTyHtNDBKmo", // Replace with your Razorpay key
-        "amount": totalAmount * 100, // Amount in paise (multiply by 100)
-        "currency": "INR",
-        "name": "Test Payment",
-        "description": "Payment for selected tests",
-        "image": "your_logo_url", // Optional, your company logo
-        "handler": function (response) {
-            alert("Payment Successful: " + response.razorpay_payment_id);
-            // Handle successful payment here (e.g., update order status in the backend)
-        },
-        "prefill": {
-            "name": "Your Name",
-            "email": "your_email@example.com",
-            "contact": "your_contact_number"
-        },
-        "theme": {
-            "color": "#F37254"
-        }
+    // Razorpay payment function
+    /*
+    function payWithRazorpay() {
+        const options = {
+            "key": "rzp_test_N8DlTyHtNDBKmo", // Replace with your Razorpay key
+            "amount": totalAmount * 100, // Amount in paise (multiply by 100)
+            "currency": "INR",
+            "name": "Test Payment",
+            "description": "Payment for selected tests",
+            "image": "your_logo_url", // Optional, your company logo
+            "handler": function (response) {
+                alert("Payment Successful: " + response.razorpay_payment_id);
+                // Handle successful payment here (e.g., update order status in the backend)
+            },
+            "prefill": {
+                "name": "Your Name",
+                "email": "your_email@example.com",
+                "contact": "your_contact_number"
+            },
+            "theme": {
+                "color": "#F37254"
+            }
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.open();
+    }
+    */
+
+    async function payWithRazorpay() {
+    const totalAmount = 100; // Replace with dynamic value
+    const paymentDetails = {
+        txnid: "unique_transaction_id_" + Date.now(), // Generate a unique transaction ID
+        amount: totalAmount,
+        firstname: "Trust Lab",
+        email: "radhikabogyam@gmail.com",
+        phone: "7702165397",
+        productinfo: "Test Payment",
     };
 
-    const rzp = new Razorpay(options);
-    rzp.open();
+    // Fetch the hash from the backend
+    const response = await fetch('/payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(paymentDetails),
+    });
+
+    const data = await response.json();
+
+    if (!data.hash) {
+        alert("Failed to generate hash.");
+        return;
+    }
+
+    // Add additional fields to the form
+    const paymentData = {
+        key: "Bzo7as", // Replace with your Merchant Key
+        txnid: data.txnid,
+        amount: totalAmount,
+        firstname: paymentDetails.firstname,
+        email: paymentDetails.email,
+        phone: paymentDetails.phone,
+        productinfo: paymentDetails.productinfo,
+        surl: "http://127.0.0.1:8000/success",
+        furl: "http://127.0.0.1:8000/failure",
+        hash: data.hash,
+    };
+
+    // Submit the form
+    const form = document.createElement("form");
+    form.action = "https://test.payu.in/_payment";
+    form.method = "POST";
+
+    for (const key in paymentData) {
+        if (paymentData.hasOwnProperty(key)) {
+            const input = document.createElement("input");
+            input.type = "hidden";
+            input.name = key;
+            input.value = paymentData[key];
+            form.appendChild(input);
+        }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
 }
+
+
 </script>
 @endsection

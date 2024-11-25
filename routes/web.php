@@ -24,3 +24,10 @@ Route::get('/diagnosticsolutions', [HomeController::class, 'diagnosticsolutions'
 Route::get('/leadershipteam', [HomeController::class, 'leadershipteam'])->name('leadershipteam');
 Route::get('/boardOfAdvisors', [HomeController::class, 'boardOfAdvisors'])->name('boardOfAdvisors');
 Route::get('/boardOfDirectors', [HomeController::class, 'boardOfDirectors'])->name('boardOfDirectors');
+
+
+// Route::get('/payment', [HomeController::class, 'showPaymentForm'])->name('payment.form');
+Route::post('/payment', [HomeController::class, 'initiatePayment'])->name('payment.initiate');
+Route::post('/payment/success', [HomeController::class, 'paymentSuccess'])->name('payment.success');
+Route::post('/payment/failure', [HomeController::class, 'paymentFailure'])->name('payment.failure');
+
